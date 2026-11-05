@@ -25,7 +25,10 @@ jobs:
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          accept-android-sdk-licenses: true
+          log-accepted-android-sdk-licenses: false
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -126,9 +129,6 @@ jobs:
           import android.webkit.WebViewClient;
           import android.webkit.WebChromeClient;
           import android.webkit.WebSettings;
-          import android.view.View;
-          import android.view.Window;
-          import android.view.WindowManager;
 
           public class MainActivity extends Activity {
               private WebView webView;
@@ -150,12 +150,9 @@ jobs:
                   settings.setLoadWithOverviewMode(true);
                   settings.setUseWideViewPort(true);
                   settings.setMediaPlaybackRequiresUserGesture(false);
-                  settings.setAllowFileAccess(true);
-                  settings.setAllowContentAccess(true);
 
                   webView.setWebViewClient(new WebViewClient());
                   webView.setWebChromeClient(new WebChromeClient());
-
                   webView.loadUrl("file:///android_asset/index.html");
               }
 
